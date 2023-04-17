@@ -1,0 +1,37 @@
+services:
+  postgres:
+    container_name: pg_container
+    image: postgres
+    environment:
+      POSTGRES_USER: Test
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: test_db
+    ports:
+      - "5432:5432"
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+  keycloak:
+    container_name: keycloak_container
+    image: "jboss/keycloak"
+    depends_on:
+      - "postgres"
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_PORT: 5432
+      DB_DATABASE: test_db
+      DB_USER: Test
+      DB_PASSWORD: example
+    ports:
+      - "8180:8080"
+      - "8181:8081"
+
+
