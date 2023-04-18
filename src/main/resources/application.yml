@@ -11,7 +11,7 @@ spring:
 jwt:
   auth:
     converter:
-      resource-id: shop
+      resource-id: login-shop
       principal-attribute: preferred_username
 
 logging:
